@@ -47,7 +47,7 @@ namespace WebScrapeRag.Services
         public async Task<List<float[]>> CreateEmbeddingsAsync(List<string> inputs, CancellationToken ct)
         {
             EmbeddingClient client = new(_embeddingModel, new ApiKeyCredential(_token), _openAiClientOptions);
-            OpenAIEmbeddingCollection response = client.GenerateEmbeddings(inputs);
+            OpenAIEmbeddingCollection response = await client.GenerateEmbeddingsAsync(inputs);
             var result = new float[inputs.Count][];
             foreach (OpenAIEmbedding embedding in response)
             {
